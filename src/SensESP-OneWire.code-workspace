@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../SensESP-Wemos-Gyroscope"
+		},
+		{
+			"name": "SensESP-Wemos-OneWire",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"functional": "cpp"
+		}
+	}
+}
