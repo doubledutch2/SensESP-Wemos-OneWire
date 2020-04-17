@@ -32,7 +32,7 @@ ReactESP app([] () {
   */
   DallasTemperatureSensors* dts = new DallasTemperatureSensors(D7);
 
-  uint read_delay = 10000;
+  uint read_delay = 60000;
 
   auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
 
