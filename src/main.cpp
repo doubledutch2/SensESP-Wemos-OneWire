@@ -21,7 +21,7 @@ ReactESP app([] () {
   Debug.setSerialEnabled(true);
   #endif
 
-  sensesp_app = new SensESPApp(uptimeOnly);
+  sensesp_app = new SensESPApp(noStdSensors);
 
   /* Find all the sensors and their unique addresses. Then, each new instance
      of OneWireTemperature will use one of those addresses. You can't specify
@@ -34,13 +34,13 @@ ReactESP app([] () {
 
   uint read_delay = 60000;
 
-  auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
+  auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/outsideTemperature/oneWire");
 
-    pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
-                ->connectTo(new SKOutputNumber("propulsion.mainEngine.coolantTemperature", "/coolantTemperature/skPath"));
-
+    pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/outsideTemperature/linear"))
+                ->connectTo(new SKOutputNumber("environment.outside.temperature", "/outsideTemperature/skPath"));
+  /*
   auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
-    
+  
     pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
                 ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature", "/exhaustTemperature/skPath"));
   
@@ -53,6 +53,6 @@ ReactESP app([] () {
       
       p12VTemp->connectTo(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
               ->connectTo(new SKOutputNumber("electrical.alternators.12V.temperature", "/12vAltTemperature/skPath"));      
-
+  */
   sensesp_app->enable();
 });
