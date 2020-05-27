@@ -30,20 +30,20 @@ ReactESP app([] () {
      the configuration page for the device. (You get to the configuration page
      by entering the IP address of the device into a browser.)
   */
-  DallasTemperatureSensors* dts = new DallasTemperatureSensors(D7);
+  DallasTemperatureSensors* dts = new DallasTemperatureSensors(D1);
 
-  uint read_delay = 60000;
+  uint read_delay = 10000;
 
   auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/outsideTemperature/oneWire");
 
     pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/outsideTemperature/linear"))
                 ->connectTo(new SKOutputNumber("environment.outside.temperature", "/outsideTemperature/skPath"));
+  
+  auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/insideTemperature/oneWire");
+  
+    pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/insideTemperature/linear"))
+                ->connectTo(new SKOutputNumber("environment.inside.onewiretemperature", "/insideTemperature/skPath"));
   /*
-  auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
-  
-    pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
-                ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature", "/exhaustTemperature/skPath"));
-  
   auto* p24VTemp = new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
       
       p24VTemp->connectTo(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
