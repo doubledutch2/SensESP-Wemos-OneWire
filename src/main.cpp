@@ -34,15 +34,20 @@ ReactESP app([] () {
 
   uint read_delay = 10000;
 
-  auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/outsideTemperature/oneWire");
+  auto* pOutSideTemp = new OneWireTemperature(dts, read_delay, "/outsideTemperature/oneWire");
 
-    pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/outsideTemperature/linear"))
+    pOutSideTemp->connectTo(new Linear(1.0, 0.0, "/outsideTemperature/linear"))
                 ->connectTo(new SKOutputNumber("environment.outside.temperature", "/outsideTemperature/skPath"));
   
-  auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/insideTemperature/oneWire");
+  auto* pInsideTemp = new OneWireTemperature(dts, read_delay, "/insideTemperature/oneWire");
   
-    pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/insideTemperature/linear"))
+    pInsideTemp->connectTo(new Linear(1.0, 0.0, "/insideTemperature/linear"))
                 ->connectTo(new SKOutputNumber("environment.inside.onewiretemperature", "/insideTemperature/skPath"));
+
+  auto* pInsideTempLong = new OneWireTemperature(dts, read_delay, "/insideTemperatureLong/oneWire");
+  
+    pInsideTempLong->connectTo(new Linear(1.0, 0.0, "/insideTemperatureLong/linear"))
+                ->connectTo(new SKOutputNumber("environment.inside.onewiretemperaturelong", "/insideTemperatureLong/skPath"));
   /*
   auto* p24VTemp = new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
       
