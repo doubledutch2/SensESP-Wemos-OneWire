@@ -21,7 +21,7 @@ ReactESP app([] () {
   Debug.setSerialEnabled(true);
   #endif
 
-  sensesp_app = new SensESPApp(noStdSensors);
+  sensesp_app = new SensESPApp("SensESP","","","",0,NONE);
 
   /* Find all the sensors and their unique addresses. Then, each new instance
      of OneWireTemperature will use one of those addresses. You can't specify
